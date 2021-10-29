@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'tap1/tap1_scr.dart';
+
 class HomeViwController extends GetxController{
   // int _selectedIndex = 0;
   // getselectedIndex()=>_selectedIndex;
@@ -75,12 +77,13 @@ class PageToView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget currentScreen=Container();
+    Widget currentScreen=Tap1Scr();
 
     switch (tabItem) {
       case 'Page1':
         {
-         // currentScreen = HomeView();
+       currentScreen = Tap1Scr();
+
           break;
         }
       case 'Page2':
@@ -92,7 +95,11 @@ class PageToView extends StatelessWidget {
         {
 
           break;
-        }
+        }case 'Page4':
+      {
+
+        break;
+      }
     }
 
     return Navigator(

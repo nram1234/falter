@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'bindings/bindings.dart';
+import 'controller/user_controller.dart';
 import 'screen/choose_scr.dart';
+import 'screen/home/home_view.dart';
+import 'screen/login_scr/login_scr.dart';
 import 'screen/splish.dart';
 
 void main() {
@@ -15,13 +18,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(debugShowCheckedModeBanner: false,initialBinding: AllBindings(),
+    return GetMaterialApp(
+        debugShowCheckedModeBanner: false, initialBinding: AllBindings(),
 
-      theme: ThemeData(
+        theme: ThemeData(
 
-        primarySwatch: Colors.blue,
-      ),
-      home:  Splish()//const MyHomePage(title: 'Flutter Demo Home Page'),
+          primarySwatch: Colors.blue,
+        ),
+        home: GetBuilder<UserController>(init: UserController(),builder: (logic) {
+          return logic.registerUser==null?    LogInScr():Home();
+        }) //Splish()//const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -97,7 +103,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .headline4,
             ),
           ],
         ),

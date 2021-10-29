@@ -57,7 +57,7 @@ class ChooseScr extends StatelessWidget {
               children: [SizedBox(height: size.height*.1,),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CustomButton(fontSize: 20,fontWeight: FontWeight.bold,
+                  child: CustomButton(function: (){},fontSize: 20,fontWeight: FontWeight.bold,
                     height: size.height * .1,
                     width: size.width * .7,
                     label: "المتجر",
@@ -67,7 +67,7 @@ class ChooseScr extends StatelessWidget {
                 )
              ,   Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CustomButton(fontSize: 20,fontWeight: FontWeight.bold,
+                  child: CustomButton(function: (){},fontSize: 20,fontWeight: FontWeight.bold,
                     height: size.height * .1,
                     width: size.width * .7,
                     label: "خدمي",
