@@ -16,7 +16,7 @@ class _Tap1ScrState extends State<Tap1Scr> {
   Widget build(BuildContext context) {
     return GetBuilder<Tap1ViewController>(builder: (logic) {
       return GridView.count(
-          crossAxisCount: 2, children: logic.data.map((e) => ItemProdect()).toList());
+          crossAxisCount: 2, children: logic.data.map((e) => ItemProdect(e)).toList());
     });
   }
 }

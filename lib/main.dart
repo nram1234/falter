@@ -5,6 +5,7 @@ import 'bindings/bindings.dart';
 import 'controller/user_controller.dart';
 import 'screen/choose_scr.dart';
 import 'screen/home/home_view.dart';
+import 'screen/home/menu/menu_view.dart';
 import 'screen/login_scr/login_scr.dart';
 import 'screen/splish.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: GetBuilder<UserController>(init: UserController(),builder: (logic) {
-          return logic.registerUser==null?    LogInScr():Home();
+          return MenuView();//logic.registerUser==null?    LogInScr():Home();
         }) //Splish()//const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }

@@ -88,32 +88,20 @@ class Products {
 class Images {
   Images({
     required this.id,
-    required this.fileName,
-    required this.productId,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.path,
   });
   late final int id;
-  late final String fileName;
-  late final int productId;
-  late final String createdAt;
-  late final String updatedAt;
+  late final String path;
 
   Images.fromJson(Map<String, dynamic> json){
     id = json['id'];
-    fileName = json['file_name'];
-    productId = json['product_id'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    path = json['path'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['id'] = id;
-    _data['file_name'] = fileName;
-    _data['product_id'] = productId;
-    _data['created_at'] = createdAt;
-    _data['updated_at'] = updatedAt;
+    _data['path'] = path;
     return _data;
   }
 }

@@ -24,7 +24,7 @@ class ItemProdect extends StatelessWidget {
       items: products.images.map((i) {
         return Builder(
           builder: (BuildContext context) {
-            return CachedNetworkImage(imageUrl: i.,
+            return CachedNetworkImage(imageUrl:i.path,
 
               height: _size.height * .2,
               fit: BoxFit.fill,
@@ -50,7 +50,7 @@ class ItemProdect extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [Text("name"), Text("price:100")],
+            children: [Text(products.name), Text("price:${products.price}")],
           ),
           Align(
               alignment: Alignment.topLeft,
