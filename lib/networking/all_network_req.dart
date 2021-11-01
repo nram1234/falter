@@ -2,23 +2,30 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'dart:developer' as developer;
 
+import 'jsonfile/getproduct_json.dart';
 import 'jsonfile/home_json.dart';
 
 class AllNetworkingReq {
   String paseurl = "https://flattery.sla-request.com/api/auth/";
   Dio _dio = Dio();
   var box = GetStorage();
-  Future<HomeJson> home({ required String token}) async {
+String gettoken(){
+return  box.read("access" );
+}
+  Future<HomeJson> home( ) async {
+   var token=gettoken();
     HomeJson? data;
     _dio.options.headers['content-Type'] = 'application/json';
-    _dio.options.headers["authorization"] = "token ${token}";
-    await _dio.get(paseurl + "home").then((value) {
-      box.write("homedata", value);
-      print(value.data);
-data=HomeJson.fromJson(value.data);
-    });
-
-    return data!;
+    _dio.options.headers["Authorization"] = "Bearer ${token}";
+   var d= await _dio.get(paseurl + "home");
+    //    .then((value) {
+      box.write("homedata", d.data);
+    //   print(value.data);
+    //
+    // });
+   print(d.data);
+   data=HomeJson.fromJson(d.data);
+    return data;
   }
 
   Future logIn({required String email, required String password}) async {
@@ -48,9 +55,16 @@ data=HomeJson.fromJson(value.data);
   }
 
 
-  Future getproduct(String id) async {
+  Future <GetProductJson>getproduct(String id) async {
+    GetProductJson data;
+var a=gettoken();
+    _dio.options.headers['content-Type'] = 'application/json';
+    _dio.options.headers["AUTHORIZATION"] = "Bearer ${a}";
 
-   return await _dio.get(paseurl + "get-product/$id");
+
+   var d=await _dio.get(paseurl + "getProduct/$id");
+    data=GetProductJson.fromJson(d.data);
+   return data;
 
 
   }

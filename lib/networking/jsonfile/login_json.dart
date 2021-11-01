@@ -1,5 +1,5 @@
-class RegisterJson {
-  RegisterJson({
+class LoginJson {
+  LoginJson({
     required this.success,
     required this.data,
     required this.message,
@@ -8,7 +8,7 @@ class RegisterJson {
   late final Data data;
   late final String message;
 
-  RegisterJson.fromJson(Map<String, dynamic> json){
+  LoginJson.fromJson(Map<String, dynamic> json){
     success = json['success'];
     data = Data.fromJson(json['data']);
     message = json['message'];
@@ -46,41 +46,45 @@ class Data {
 
 class User {
   User({
+    required this.id,
     required this.name,
     required this.email,
-    required this.phone,
     required this.vip,
-    required this.updatedAt,
+    required this.phone,
+    this.packageId,
     required this.createdAt,
-    required this.id,
+    required this.updatedAt,
   });
+  late final int id;
   late final String name;
   late final String email;
-  late final String phone;
   late final int vip;
-  late final String updatedAt;
+  late final String phone;
+  late final Null packageId;
   late final String createdAt;
-  late final int id;
+  late final String updatedAt;
 
   User.fromJson(Map<String, dynamic> json){
+    id = json['id'];
     name = json['name'];
     email = json['email'];
-    phone = json['phone'];
     vip = json['vip'];
-    updatedAt = json['updated_at'];
+    phone = json['phone'];
+    packageId = null;
     createdAt = json['created_at'];
-    id = json['id'];
+    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
+    _data['id'] = id;
     _data['name'] = name;
     _data['email'] = email;
-    _data['phone'] = phone;
     _data['vip'] = vip;
-    _data['updated_at'] = updatedAt;
+    _data['phone'] = phone;
+    _data['package_id'] = packageId;
     _data['created_at'] = createdAt;
-    _data['id'] = id;
+    _data['updated_at'] = updatedAt;
     return _data;
   }
 }

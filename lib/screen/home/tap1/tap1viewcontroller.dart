@@ -8,22 +8,22 @@ class Tap1ViewController extends GetxController {
   List<Products> data = [];
   AllNetworkingReq _allNetworkingReq = AllNetworkingReq();
   var box = GetStorage();
-
+bool getdatafromweb=true;
   @override
   void onInit() {
     super.onInit();
+
     updatedata();
   }
 
   updatedata() async {
     // Get.find<OnlineNetWorkController>().initConnctivity();
     // if (Get.find<OnlineNetWorkController>().connectionStatus) {
-      var d = await box.read("accessToken");
-      print(d);
-      HomeJson homeJson = await _allNetworkingReq.home(token: d);
+
+      HomeJson homeJson = await _allNetworkingReq.home( );
 
       data = homeJson.data.products;
-
+getdatafromweb=false;
 
       update();
     // } else {

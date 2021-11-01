@@ -18,31 +18,40 @@ class RegisterScrController extends GetxController {
   var box = GetStorage();
 bool regist=false;
   register() async {
+    updateregist(data: true);
     if (!username.text.isEmpty &&
         !email.text.isEmpty &&
         !phone.text.isEmpty &&
         !password.text.isEmpty) {
       if (password.text == repassword.text) {
-        updateregist(data: true);
+
         try {
           final data = await _allNetworkingReq.register(
               name: username.text,
               email: email.text,
               phone: phone.text,
-              password: password.text);
-          RegisterJson _registerJson = RegisterJson.fromJson(data);
-         await box.write("accessToken", _registerJson.data.accessToken);
-         print("accessToken   ${  _registerJson.data.accessToken}");
-        await  box.write("name", _registerJson.data.userdata.name);
-        await  box.write("phone", _registerJson.data.userdata.phone);
-        await  box.write("email", _registerJson.data.userdata.email);
-        await  box.write("id", _registerJson.data.userdata.id);
-        await  box.write("vip", _registerJson.data.userdata.vip);
-        await  box.write("createdAt", _registerJson.data.userdata.createdAt);
-        await  box.write("updatedAt", _registerJson.data.userdata.updatedAt);
-          Get.snackbar('نجاح', 'لقد تم التسجيل بنجاح');
-          Get.to(() => Home());
+              password: password.text).then((value)async {
+            RegisterJson _registerJson =   RegisterJson.fromJson(value.data);
+            await box.write("access", _registerJson.data.accessToken);
+
+            await  box.write("name", _registerJson.data.user.name);
+            await  box.write("phone", _registerJson.data.user.phone);
+            await  box.write("email", _registerJson.data.user.email);
+            await  box.write("id", _registerJson.data.user.id);
+            await  box.write("vip", _registerJson.data.user.vip);
+
+            // await  box.write("createdAt", _registerJson.data.user.createdAt);
+            // await  box.write("updatedAt", _registerJson.data.user.updatedAt);
+
+            Get.snackbar('نجاح', _registerJson.message);
+         //   Get.to(() => Home());
+            print( "11111111111111111111111111111111111111"  );
+            print( box.read("access" ));
+          });
+
+
         } catch (e) {
+          print(e.toString());
           Get.snackbar('خطاء', 'بيانات المستخدم موجوده مسبقا');
         }
       } else {
@@ -51,7 +60,8 @@ bool regist=false;
     } else {
       Get.snackbar('خطاء', 'برجاء ادخال البيانات');
     }
-    updateregist(data: false); }
+    updateregist(data: false);
+  }
 
   updateregist({ required bool data}){
     regist=data;

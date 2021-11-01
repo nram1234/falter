@@ -3,18 +3,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class LogInViewController extends GetxController{
-  TextEditingController username=TextEditingController();
+  TextEditingController phone=TextEditingController();
   TextEditingController password=TextEditingController();
 
 
   AllNetworkingReq _allNetworkingReq=AllNetworkingReq();
 
-
+bool arlogin=false;
+updatarlogin(bool data){
+ arlogin=true;
+ update();
+}
 
 login()async{
-  if(!username.text.isEmpty&&!password.text.isEmpty){
- var data=   _allNetworkingReq.logIn(email: username.text, password: password.text);
+  if(!phone.text.isEmpty&&!password.text.isEmpty){
+ var data=   _allNetworkingReq.logIn(email: phone.text, password: password.text);
  print(data);
+ updatarlogin(false);
   }else{
     Get.snackbar('', 'برجاء ادخال البيانات');
   }

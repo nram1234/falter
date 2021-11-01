@@ -6,3 +6,5 @@ const Color textbuttonColor=Color(0xffffffff);
 const Color menubackground=Color(0xffEDEDED);
 const Color backmenubackground=Color(0xffffffff);
 const Color textcolor=Color(0xff1381CA);
+const Color appBarcolors=Color(0xff1381CA);
+const Color blackcolore=Color(0xff000000);

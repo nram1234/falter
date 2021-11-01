@@ -34,11 +34,15 @@ class _HomeState extends State<Home> {
                       color: const Color(0xFF1381CA).withOpacity(0.19),
                     ),
                   )
-                 , Image.asset(
-                    'assets/images/mun.png',
-                    height: 50,
-                    width: size.width*.1,
-                  ),  ],
+                 , InkWell(onTap:(){
+                   Get.find<HomeViwController>().gotomun();
+                  } ,
+                   child: Image.asset(
+                      'assets/images/mun.png',
+                      height: 50,
+                      width: size.width*.1,
+                    ),
+                 ),  ],
               ),
             ),
             Expanded(

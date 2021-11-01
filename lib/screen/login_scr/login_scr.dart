@@ -6,13 +6,16 @@ import 'package:falter/screen/register/register_scr.dart';
 import 'package:falter/utilitie/utilitie.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LogInScr extends StatelessWidget {
   LogInViewController _controller = LogInViewController();
 
   @override
   Widget build(BuildContext context) {
-    Size _size = MediaQuery.of(context).size;
+    Size _size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
@@ -28,12 +31,12 @@ class LogInScr extends StatelessWidget {
               height: _size.height * .3,
             ),
             CustomTextFiled(
-              hintText: "اسم الحساب",
-              keyboardType: TextInputType.text,
+              hintText: "التليفون",
+              keyboardType: TextInputType.phone,
               width: _size.width * .8,
               color: Colors.white,
               icon: Icons.person,
-              textEditingController: _controller.username,
+              textEditingController: _controller.phone,
             ),
             CustomTextFiled(
               hintText: "كلمة المرور",
@@ -44,18 +47,22 @@ class LogInScr extends StatelessWidget {
               obscureText: true,
               textEditingController: _controller.password,
             ),
-            CustomButton(function: (){
-              Get.to(()=>Home());
-       // _controller    .;
-            },
-              width: _size.width * .4,
-              height: 50,
-              btcolor: buttonColor,
-              label: "دخول",
-              labcolor: textbuttonColor,
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-            ),
+            GetBuilder<LogInViewController>(builder: (logic) {
+              return logic .arlogin?CircularProgressIndicator():CustomButton(function: () {
+                logic.updatarlogin(true);
+                _controller.login();
+                //   Get.to(()=>Home());
+                // _controller    .;
+              },
+                width: _size.width * .4,
+                height: 50,
+                btcolor: buttonColor,
+                label: "دخول",
+                labcolor: textbuttonColor,
+                fontWeight: FontWeight.normal,
+                fontSize: 14,
+              );
+            }),
             Padding(
               padding: const EdgeInsets.only(
                   right: 20, left: 20, top: 20, bottom: 20),
@@ -65,13 +72,13 @@ class LogInScr extends StatelessWidget {
               ),
             ),
             Center(
-              child: InkWell(onTap:(){
-                Get.to(()=>RegisterScr());
-              } ,
+              child: InkWell(onTap: () {
+                Get.to(() => RegisterScr());
+              },
                 child: Text(
                   "تسجيل حساب جديد",
                   style:
-                      TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                  TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

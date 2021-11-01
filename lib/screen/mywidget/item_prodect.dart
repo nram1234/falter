@@ -16,42 +16,47 @@ class ItemProdect extends StatelessWidget {
       elevation: 8,
       child: Column(
         children: [
-          Stack(
-            children: [
-              Container(
-                child:CarouselSlider(
-          options: CarouselOptions(height: 400.0),
-      items: products.images.map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return CachedNetworkImage(imageUrl:i.path,
-
-              height: _size.height * .2,
-              fit: BoxFit.fill,
-            );
-          },
-        );
-      }).toList(),
-    )
-
-
-                ,
-
-              ),
-              Positioned(
-                  top: 5,
-                  left: 5,
-                  child: Image.asset(
-                    'assets/images/percent.png',
-                    height: 50,
-                    width: 50,
-                  ))
-            ],
+          Expanded(
+            flex: 1,
+            child: Stack(
+              children: [
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: _size.height * .25,
+                    autoPlay: true,
+                  ),
+                  items: products.images.map((i) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return CachedNetworkImage(
+                          imageUrl: i.path,
+                          height: _size.height * .18,
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+                Positioned(
+                    top: 5,
+                    left: 5,
+                    child: Image.asset(
+                      'assets/images/percent.png',
+                      height: 50,
+                      width: 50,
+                    ))
+              ],
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [Text(products.name), Text("price:${products.price}")],
-          ),
+          Text(products.name),
+          Text("price:${products.price}")
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //     children: [Container(child: Text(products.name)), Container(child: Text("price:${products.price}"))],
+          //   ),
+          // )
+          ,
           Align(
               alignment: Alignment.topLeft,
               child: Padding(

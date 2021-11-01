@@ -1,6 +1,11 @@
-import 'package:falter/screen/mywidget/custom_text.dart';
+
+import 'package:falter/screen/mywidget/custom_text_icon_menu.dart';
 import 'package:falter/utilitie/utilitie.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'aboutus/about_us_view.dart';
+import 'conus/conus_view.dart';
 
 class MenuView extends StatefulWidget {
   @override
@@ -33,47 +38,53 @@ class _MenuViewState extends State<MenuView> {
                     'assets/images/fulllogo.png',
                     height: _size.height * .3,
                   ),
-                  CustomText(imag:'assets/images/aaa.png' ,
+                  CustomText(imag:'assets/images/aaa.png' ,ontap: (){
+                    print('777777777777777777777777777777777777');
+                  },
                     text: "الصفحة الرئيسية",
                     fontWeight: FontWeight.bold,
                     size: 20,
                     havedivider: true,
                   ),
-                  CustomText(imag:'assets/images/hh.png' ,
+                  CustomText(imag:'assets/images/hh.png' ,ontap: (){
+                    Get.to(()=>AboutUsFiew());
+                  },
                     text: "من نحن",
                     fontWeight: FontWeight.bold,
                     size: 20,
                     havedivider: true,
                   ),
-                  CustomText(imag:'assets/images/i.png' ,
+                  CustomText(imag:'assets/images/i.png' , ontap: (){
+                    Get.to(()=>ConUsView());
+                  },
                     text: "تواصل معنا",
                     fontWeight: FontWeight.bold,
                     size: 20,
                     havedivider: true,
                   ),
-                  CustomText(imag:'assets/images/c.png' ,
+                  CustomText(imag:'assets/images/c.png' ,ontap: (){},
                     text: "سلة المشتريات",
                     fontWeight: FontWeight.bold,
                     size: 20,
                     havedivider: true,
                   ),
-                  CustomText(imag:'assets/images/o.png' ,
+                  CustomText(imag:'assets/images/o.png' ,ontap: (){},
                     text: "الصيانة الدورية",
                     fontWeight: FontWeight.bold,
                     size: 20,
                     havedivider: true,
                   ),
-                  CustomText(imag:'assets/images/pp.png' ,
+                  CustomText(imag:'assets/images/pp.png' ,ontap: (){},
                     text: "بروفايل",
                     fontWeight: FontWeight.bold,
                     size: 20,
                     havedivider: true,
-                  ), CustomText(imag:'assets/images/a.png' ,
+                  ), CustomText(imag:'assets/images/a.png' ,ontap: (){},
                     text: "عقود الصيانة",
                     fontWeight: FontWeight.bold,
                     size: 20,
                     havedivider: true,
-                  ),
+                  ) ,
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [ Padding(
                       padding: const EdgeInsets.all(8.0),

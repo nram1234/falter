@@ -1,3 +1,4 @@
+import 'package:falter/screen/menu/menu_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -66,6 +67,9 @@ class HomeViwController extends GetxController{
         tabItem: tabItem,
       ),
     );
+  }
+  gotomun(){
+    Get.to(()=>MenuView());
   }
 }
 

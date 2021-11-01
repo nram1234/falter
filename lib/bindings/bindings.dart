@@ -1,6 +1,7 @@
  import 'package:falter/controller/onlinecontroller.dart';
 import 'package:falter/controller/user_controller.dart';
 import 'package:falter/screen/home/home_view_controller.dart';
+import 'package:falter/screen/home/itemdes/item_viewcontroller.dart';
 import 'package:falter/screen/home/tap1/tap1viewcontroller.dart';
 import 'package:falter/screen/login_scr/login_scr_controller.dart';
 import 'package:falter/screen/register/register_scr_controller.dart';
@@ -17,7 +18,9 @@ class AllBindings extends Bindings{
     Get.lazyPut(() => LogInViewController() );
 
 
+    Get.lazyPut(() => ItemViewController() );
     Get.lazyPut(() => OnlineNetWorkController() );
+
   }
 
 }
