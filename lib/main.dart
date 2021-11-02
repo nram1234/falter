@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
 
           primarySwatch: Colors.blue,
         ),
-        home:accessToken==null?LogInScr():Home() //Splish()//const MyHomePage(title: 'Flutter Demo Home Page'),
+        home: accessToken==null?LogInScr():Home() //Splish()//const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

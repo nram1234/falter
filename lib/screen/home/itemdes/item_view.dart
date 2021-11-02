@@ -21,11 +21,14 @@ class _ItemViewState extends State<ItemView> {
     return Scaffold(
       body: GetBuilder<ItemViewController>(builder: (logic) {
         return logic.getdatafromweb
-            ? CircularProgressIndicator()
+            ? Center(child: CircularProgressIndicator())
             : Column(
                 children: [
                   CarouselSlider(
-                    options: CarouselOptions(height: 400.0),
+                    options: CarouselOptions(
+                        height: _size.height * .3,
+                        autoPlay: true,
+                        enableInfiniteScroll: true,),
                     items: logic.prodect!.data[0].images.map((i) {
                       return Builder(
                         builder: (BuildContext context) {
@@ -38,9 +41,18 @@ class _ItemViewState extends State<ItemView> {
                       );
                     }).toList(),
                   ),
-                  Text(logic.prodect!.data[0].name),
-                  Text(logic.prodect!.data[0].price),
-                  Text(logic.prodect!.data[0].desc),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(logic.prodect!.data[0].name,style: TextStyle(fontSize: 20),),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(logic.prodect!.data[0].price,style: TextStyle(fontSize: 20),),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(logic.prodect!.data[0].desc,style: TextStyle(fontSize: 20),),
+                  ),
                 ],
               );
       }),

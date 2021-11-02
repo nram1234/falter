@@ -16,9 +16,9 @@ class RegisterScrController extends GetxController {
 
   AllNetworkingReq _allNetworkingReq = AllNetworkingReq();
   var box = GetStorage();
-bool regist=false;
+RxBool regist=false.obs;
   register() async {
-    updateregist(data: true);
+
     if (!username.text.isEmpty &&
         !email.text.isEmpty &&
         !phone.text.isEmpty &&
@@ -26,6 +26,7 @@ bool regist=false;
       if (password.text == repassword.text) {
 
         try {
+          updateregist(data: true);
           final data = await _allNetworkingReq.register(
               name: username.text,
               email: email.text,
@@ -44,27 +45,29 @@ bool regist=false;
             // await  box.write("updatedAt", _registerJson.data.user.updatedAt);
 
             Get.snackbar('نجاح', _registerJson.message);
-         //   Get.to(() => Home());
-            print( "11111111111111111111111111111111111111"  );
-            print( box.read("access" ));
+          Get.to(() => Home());
+            updateregist(data: false);
           });
 
 
         } catch (e) {
-          print(e.toString());
+
           Get.snackbar('خطاء', 'بيانات المستخدم موجوده مسبقا');
+          updateregist(data: false);
         }
       } else {
         Get.snackbar('خطاء', 'كلمه السر غير متطابقة');
+        updateregist(data: false);
       }
     } else {
       Get.snackbar('خطاء', 'برجاء ادخال البيانات');
+      updateregist(data: false);
     }
-    updateregist(data: false);
+
   }
 
   updateregist({ required bool data}){
-    regist=data;
-    update();
+    regist.value=data;
+
   }
 }

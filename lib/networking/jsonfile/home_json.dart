@@ -60,7 +60,7 @@ class Products {
   late final int offer;
   late final String price;
   late final String vip;
-  late final List<Images> images;
+  late final List<Images>? images;
 
   Products.fromJson(Map<String, dynamic> json){
     id = json['id'];
@@ -80,7 +80,7 @@ class Products {
     _data['offer'] = offer;
     _data['price'] = price;
     _data['vip'] = vip;
-    _data['images'] = images.map((e)=>e.toJson()).toList();
+    _data['images'] = images!.map((e)=>e.toJson()).toList();
     return _data;
   }
 }

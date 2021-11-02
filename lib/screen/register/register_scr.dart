@@ -88,23 +88,23 @@ class _RegisterScrState extends State<RegisterScr> {
               color: Colors.white,
               textEditingController: _controller.city,
             ),
-            GetBuilder<RegisterScrController>(builder: (logic) {
-              print(logic.regist);
-              return logic.regist
+            Obx((){
+                   return _controller.regist.value
                   ? CircularProgressIndicator()
                   : CustomButton(
-                      function: () {
-                        _controller.register();
-                      },
-                      width: _size.width * .4,
-                      height: 50,
-                      btcolor: buttonColor,
-                      label: "تسجيل",
-                      labcolor: textbuttonColor,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                    );
-            }),
+                function: () {
+                  _controller.register();
+                },
+                width: _size.width * .4,
+                height: 50,
+                btcolor: buttonColor,
+                label: "تسجيل",
+                labcolor: textbuttonColor,
+                fontWeight: FontWeight.normal,
+                fontSize: 14,
+              );
+            }) ,
+
             Padding(
               padding: const EdgeInsets.only(
                   right: 20, left: 20, top: 20, bottom: 20),

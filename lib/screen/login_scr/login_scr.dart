@@ -47,23 +47,39 @@ class LogInScr extends StatelessWidget {
               obscureText: true,
               textEditingController: _controller.password,
             ),
-            GetBuilder<LogInViewController>(builder: (logic) {
-              return logic .arlogin?CircularProgressIndicator():CustomButton(function: () {
-                logic.updatarlogin(true);
-                _controller.login();
-                //   Get.to(()=>Home());
-                // _controller    .;
-              },
-                width: _size.width * .4,
-                height: 50,
-                btcolor: buttonColor,
-                label: "دخول",
-                labcolor: textbuttonColor,
-                fontWeight: FontWeight.normal,
-                fontSize: 14,
-              );
-            }),
-            Padding(
+Obx((){
+ return _controller.arlogin.value? CircularProgressIndicator():CustomButton(function: () {
+
+  _controller.login();
+
+  },
+  width: _size.width * .4,
+  height: 50,
+  btcolor: buttonColor,
+  label: "دخول",
+  labcolor: textbuttonColor,
+  fontWeight: FontWeight.normal,
+  fontSize: 14,
+  );
+})
+            // GetBuilder<_controller>(builder: (logic) {
+            // print(logic .arlogin);
+            //   return logic .arlogin?CircularProgressIndicator():CustomButton(function: () {
+            //     logic.updatarlogin(true);
+            //    logic.login();
+            //     //   Get.to(()=>Home());
+            //     // _controller    .;
+            //   },
+            //     width: _size.width * .4,
+            //     height: 50,
+            //     btcolor: buttonColor,
+            //     label: "دخول",
+            //     labcolor: textbuttonColor,
+            //     fontWeight: FontWeight.normal,
+            //     fontSize: 14,
+            //   );
+            // }),
+         ,   Padding(
               padding: const EdgeInsets.only(
                   right: 20, left: 20, top: 20, bottom: 20),
               child: Divider(

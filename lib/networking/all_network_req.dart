@@ -28,15 +28,13 @@ return  box.read("access" );
     return data;
   }
 
-  Future logIn({required String email, required String password}) async {
+  Future logIn({required String phone, required String password}) async {
     final formData = {
-      "email": email,
+      "phone": phone,
       "password": password,
     };
 
-    await _dio.post(paseurl + "login", queryParameters: formData).then((value) {
-      print(value);
-    });
+  return  await _dio.post(paseurl + "login", queryParameters: formData);
   }
 
   Future register(
@@ -67,5 +65,43 @@ var a=gettoken();
    return data;
 
 
+  }
+
+
+  Future makeOrder( {required  List<int>ids}) async {
+    GetProductJson data;
+    var a=gettoken();
+    _dio.options.headers['content-Type'] = 'application/json';
+    _dio.options.headers["AUTHORIZATION"] = "Bearer ${a}";
+
+    final formData = {
+      "email": box.read("email" ),
+
+      "name": box.read("name" ),
+      "phone": box.read("phone" ),
+      "total_price":500,
+      "products":[3,4],
+    };
+    var d=await _dio.post(paseurl + "make-order",queryParameters: formData);
+
+    return d;
+
+
+  }
+  Future userUpdate(
+      {required String name,
+        required String email,
+        required String phone,
+       }) async {
+    final formData = {
+      "email": email,
+
+      "name": name,
+      "phone": phone,
+    };
+    var a=gettoken();
+    _dio.options.headers['content-Type'] = 'application/json';
+    _dio.options.headers["AUTHORIZATION"] = "Bearer ${a}";
+    return await _dio.post(paseurl + "register", queryParameters: formData);
   }
 }

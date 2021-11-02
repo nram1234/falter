@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'tap1/tap1_scr.dart';
+import 'tap4profile/tap4_scr.dart';
 
-class HomeViwController extends GetxController{
+class HomeViwController extends GetxController {
   // int _selectedIndex = 0;
   // getselectedIndex()=>_selectedIndex;
   // setSelectIndex(int index){
@@ -12,11 +13,10 @@ class HomeViwController extends GetxController{
   //   update();
   // }
 
-
-
   int _navigatorValue = 0;
   String _currentPage = 'Page1';
-  var _navigatorKey ;
+  var _navigatorKey;
+
   List<String> _pageKeys = ['Page1', 'Page2', 'Page3', 'Page4'];
 
   get navigatorValue => _navigatorValue;
@@ -44,10 +44,9 @@ class HomeViwController extends GetxController{
       naigatorKey: _navigatorKeys[_pageKeys[0]]!,
       tabItem: _pageKeys[0],
     ); //=HomeView();
-
   }
 
-    changeSelectedValue(int selectedValue) {
+  changeSelectedValue(int selectedValue) {
     _navigatorValue = selectedValue;
     _currentPage = _pageKeys[selectedValue];
     _navigatorKey = _navigatorKeys[_currentPage];
@@ -59,17 +58,19 @@ class HomeViwController extends GetxController{
 
     update();
   }
+
   Widget buildoffstageNavigator(String tabItem) {
     return Offstage(
       offstage: _currentPage != tabItem,
       child: PageToView(
-        naigatorKey: _navigatorKeys [tabItem]!,
+        naigatorKey: _navigatorKeys[tabItem]!,
         tabItem: tabItem,
       ),
     );
   }
-  gotomun(){
-    Get.to(()=>MenuView());
+
+  gotomun() {
+    Get.to(() => MenuView());
   }
 }
 
@@ -77,33 +78,35 @@ class PageToView extends StatelessWidget {
   final GlobalKey<NavigatorState> naigatorKey;
   final String tabItem;
 
-  const PageToView({ required this.naigatorKey,  required this.tabItem});
+  const PageToView({required this.naigatorKey, required this.tabItem});
 
   @override
   Widget build(BuildContext context) {
-    Widget currentScreen=Tap1Scr();
+    Widget currentScreen = Tap1Scr();
 
     switch (tabItem) {
       case 'Page1':
         {
-       currentScreen = Tap1Scr();
+          currentScreen = Tap1Scr();
 
           break;
         }
       case 'Page2':
         {
-
+          currentScreen = Container();
           break;
         }
       case 'Page3':
         {
-
+          currentScreen = Container();
           break;
-        }case 'Page4':
-      {
+        }
+      case 'Page4':
+        {
 
-        break;
-      }
+          currentScreen = Tap4Profile();
+          break;
+        }
     }
 
     return Navigator(

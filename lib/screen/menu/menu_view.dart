@@ -1,4 +1,5 @@
 
+import 'package:falter/screen/cart/cart_view.dart';
 import 'package:falter/screen/mywidget/custom_text_icon_menu.dart';
 import 'package:falter/utilitie/utilitie.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,9 @@ class _MenuViewState extends State<MenuView> {
                     size: 20,
                     havedivider: true,
                   ),
-                  CustomText(imag:'assets/images/c.png' ,ontap: (){},
+                  CustomText(imag:'assets/images/c.png' ,ontap: (){
+                    Get.to(()=>CartView());
+                  },
                     text: "سلة المشتريات",
                     fontWeight: FontWeight.bold,
                     size: 20,
