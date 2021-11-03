@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import 'aboutus/about_us_view.dart';
 import 'conus/conus_view.dart';
+import 'menu_viewcontroller.dart';
 
 class MenuView extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class MenuView extends StatefulWidget {
 }
 
 class _MenuViewState extends State<MenuView> {
+  MenuViewController _menuViewController=Get.find<MenuViewController>();
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
@@ -88,25 +90,29 @@ class _MenuViewState extends State<MenuView> {
                     size: 20,
                     havedivider: true,
                   ) ,
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [ Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child:   Image.asset(
-                        'assets/images/s.png' ,
-                        height: 50,width: 50,
-                      ),
-                    ),
-                      Padding(
+                  InkWell(onTap: (){
+                    _menuViewController.logout();
+                  },
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [ Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "تسجيل الخروج",
-                          style: TextStyle(
-                              color: textcolor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                        child:   Image.asset(
+                          'assets/images/s.png' ,
+                          height: 50,width: 50,
                         ),
                       ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "تسجيل الخروج",
+                            style: TextStyle(
+                                color: textcolor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
 
                 ],

@@ -1,5 +1,6 @@
 import 'package:falter/networking/all_network_req.dart';
 import 'package:falter/networking/jsonfile/login_json.dart';
+import 'package:falter/screen/home/home_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -36,6 +37,7 @@ class LogInViewController extends GetxController {
         await  box.write("id", _loginJson.data.user.id);
         await  box.write("vip", _loginJson.data.user.vip);
         Get.snackbar('مرحبا', "تم تسجيل الدخول بنجاح");
+        Get.offAll(() => Home());
       updatarlogin(false);
       } catch (e) {
         print(e);

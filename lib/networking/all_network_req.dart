@@ -49,7 +49,7 @@ return  box.read("access" );
       "phone": phone,
     };
 
-   return await _dio.post(paseurl + "register", queryParameters: formData);
+   return await _dio.post(paseurl + "register", data: formData);
   }
 
 
@@ -100,8 +100,8 @@ var a=gettoken();
       "phone": phone,
     };
     var a=gettoken();
-    _dio.options.headers['content-Type'] = 'application/json';
+   // _dio.options.headers['content-Type'] = 'application/json';
     _dio.options.headers["AUTHORIZATION"] = "Bearer ${a}";
-    return await _dio.post(paseurl + "register", queryParameters: formData);
+    return await _dio.post(paseurl + "register", data: formData);
   }
 }
