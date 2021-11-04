@@ -55,7 +55,7 @@ class ItemProdect extends StatelessWidget {
             ),
           ),
           Text(products.name),
-          Text("price:${products.price}")
+          Text(" السعر : ${products.price}")
           // Padding(
           //   padding: const EdgeInsets.all(8.0),
           //   child: Row(

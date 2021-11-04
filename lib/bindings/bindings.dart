@@ -18,14 +18,14 @@ class AllBindings extends Bindings{
     Get.lazyPut(() => Tap1ViewController() ,fenix: true);
     Get.lazyPut(() => Tab4Profile() );
 
-    Get.lazyPut(() => CartViewController() );
+    Get.lazyPut(() => CartViewController(),fenix: true  );
     Get.lazyPut(() => RegisterScrController() );
     Get.lazyPut(() => LogInViewController() );
 
 
     Get.lazyPut(() => MenuViewController(),fenix: true );
-    Get.lazyPut(() => ItemViewController() );
-    Get.lazyPut(() => OnlineNetWorkController() );
+    Get.lazyPut(() => ItemViewController() ,fenix: true );
+    Get.lazyPut(() => OnlineNetWorkController(),   );
 
   }
 

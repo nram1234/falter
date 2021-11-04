@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'bindings/bindings.dart';
+import 'controller/onlinecontroller.dart';
 import 'controller/user_controller.dart';
 import 'screen/choose_scr.dart';
 import 'screen/home/home_view.dart';
@@ -23,14 +24,17 @@ class MyApp extends StatelessWidget {
 
   var box = GetStorage();
 
+  UserController _userController=Get.put(UserController());
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
   var  accessToken=   box.read("access" );
- UserController userController=Get.put(UserController());
+
+
  if(accessToken!=null){
    print(accessToken);
-   userController.updatetoken(accessToken);
+   _userController.updatetoken(accessToken);
  }
 
     return GetMaterialApp(

@@ -11,30 +11,35 @@ class CartViewController extends GetxController {
   Tap1ViewController _tap1viewController = Get.find<Tap1ViewController>();
   RxBool sendData = false.obs;
   AllNetworkingReq _allNetworkingReq = AllNetworkingReq();
-
+RxDouble totalprice=0.0.obs;
   buyorder() async {
     sendData.value = true;
-
-    await _allNetworkingReq.makeOrder(ids: [3, 4]);
+List i=[];
+itemincardwillsendtoweb.forEach((key, value) {
+  i.add(value.toMap());
+});
+ 
+    await _allNetworkingReq.makeOrder(ids:i);
     sendData.value = false;
   }
 
   addItemToCart(Products item) {
     data.add(item);
-    // itemincardwillsendtoweb[item.id]=CartItemDataType(qt: 1, id: item.id);
+   
 
     update();
   }
 
   additemincardwillsendtoweb(Products item) {
-    itemincardwillsendtoweb[item.id] = CartItemDataType(qt: 1, id: item.id);
 
+    itemincardwillsendtoweb[item.id] = CartItemDataType(qt: 1, id: item.id,price:double.parse(item.price.split(" ")[0].replaceAll(",", "")));
+    getTotalprice();
     update();
   }
 
   removeitemincardwillsendtoweb(Products item) {
     itemincardwillsendtoweb.remove(item.id);
-
+    getTotalprice();
     update();
   }
 
@@ -77,7 +82,7 @@ class CartViewController extends GetxController {
     if (itemincardwillsendtoweb[id] != null) {
       itemincardwillsendtoweb[id]!.qt = itemincardwillsendtoweb[id]!.qt + 1;
     }
-    print(itemincardwillsendtoweb[id]!.qt);
+    getTotalprice();
     //
     update();
   }
@@ -88,7 +93,13 @@ class CartViewController extends GetxController {
         itemincardwillsendtoweb[id]!.qt--;
       }
     }
-
+    getTotalprice();
     update();
+  }
+  getTotalprice(){
+   totalprice.value=0;
+   itemincardwillsendtoweb.forEach((key, value) {
+     totalprice.value+=value.price*value.qt;
+   });
   }
 }

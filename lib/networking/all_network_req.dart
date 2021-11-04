@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'dart:developer' as developer;
 
@@ -68,7 +69,7 @@ var a=gettoken();
   }
 
 
-  Future makeOrder( {required  List<int>ids}) async {
+  Future makeOrder( {required  List ids}) async {
     GetProductJson data;
     var a=gettoken();
     _dio.options.headers['content-Type'] = 'application/json';
@@ -76,13 +77,24 @@ var a=gettoken();
 
     final formData = {
       "email": box.read("email" ),
-
+"payment_done":1,
       "name": box.read("name" ),
       "phone": box.read("phone" ),
+      "address":"ihguigiuu",
       "total_price":500,
-      "products":[3,4],
+      "products":ids,
     };
-    var d=await _dio.post(paseurl + "make-order",queryParameters: formData);
+    print(formData);
+    var d=await _dio.post(paseurl + "makeOrder",queryParameters: formData).then((value){
+      print(value.statusCode==200);
+      if(value.statusCode==200){
+        Get.snackbar('نجاح', "تمت عملية الشراء بنجاح");
+      }else{
+
+        Get.snackbar('خطاء', "برجاء مراجعة حقول البيانات");
+
+      }
+    });
 
     return d;
 
@@ -103,6 +115,6 @@ var a=gettoken();
     _dio.options.headers['content-Type'] = 'application/json';
     _dio.options.headers["AUTHORIZATION"] = "Bearer $a";
     _dio.options.followRedirects=   false;
-    return await _dio.post(paseurl + "userUpdate", queryParameters: formData);
+    return await _dio.post(paseurl + "userUpdate", data: formData);
   }
 }

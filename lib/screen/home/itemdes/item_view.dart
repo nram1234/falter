@@ -23,134 +23,155 @@ class _ItemViewState extends State<ItemView> {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      body: GetBuilder<ItemViewController>(builder: (logic) {
-        return logic.getdatafromweb
-            ? Center(child: CircularProgressIndicator())
-            : Column(
-                children: [
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      height: _size.height * .3,
-                      autoPlay: true,
-                      enableInfiniteScroll: true,
-                    ),
-                    items: logic.prodect!.data[0].images.map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return CachedNetworkImage(
-                            imageUrl: i.path,
-                            height: _size.height * .2,
-                            fit: BoxFit.fill,
+    return SafeArea(
+      child: Scaffold(
+        body: GetBuilder<ItemViewController>(builder: (logic) {
+          return logic.getdatafromweb
+              ? Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
+                child: Column(
+                    children: [const SizedBox(height: 16,),
+                      CarouselSlider(
+                        options: CarouselOptions(
+                          height: _size.height * .3,
+                          autoPlay: true,
+                          enableInfiniteScroll: true,
+                        ),
+                        items: logic.prodect!.data[0].images.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return CachedNetworkImage(
+                                imageUrl: i.path,
+                                height: _size.height * .2,
+                                fit: BoxFit.fill,
+                              );
+                            },
                           );
-                        },
-                      );
-                    }).toList(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Obx(() {
-                                return InkWell(
+                        }).toList(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Align(
+                                alignment: Alignment.topLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Obx(() {
+                                    return InkWell(
+                                        onTap: () {
+                                          bool v = c.data.any(
+                                              (element) => element.id == widget.id);
+
+                                          if (v) {
+                                            c.removeItemfromCartById(widget.id);
+
+                                          } else {
+                                            c.addItemtoCartById(widget.id);
+
+                                          }
+
+                                          print(c.data.any((element) =>
+                                              element.id == widget.id));
+                                        },
+                                        child: Icon(
+                                          Icons.add_shopping_cart,
+                                          color: c.data.any((element) =>
+                                                  element.id == widget.id)
+                                              ? appBarcolors
+                                              : blackcolore,
+                                        ));
+                                  }),
+                                )),
+
+                            Container(
+
+
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  InkWell(
                                     onTap: () {
-                                      bool v = c.data.any(
-                                          (element) => element.id == widget.id);
-
-                                      if (v) {
-                                        c.removeItemfromCartById(widget.id);
-
-                                      } else {
-                                        c.addItemtoCartById(widget.id);
-
-                                      }
-
-                                      print(c.data.any((element) =>
-                                          element.id == widget.id));
+                                      c.decrementQTtoitem(id: widget.id);
                                     },
-                                    child: Icon(
-                                      Icons.add_shopping_cart,
-                                      color: c.data.any((element) =>
-                                              element.id == widget.id)
-                                          ? appBarcolors
-                                          : blackcolore,
-                                    ));
-                              }),
-                            )),
-                        Container(
-                          height: 50,
-                          width: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  c.decrementQTtoitem(id: widget.id);
-                                },
-                                child: const Text(
-                                  "-",
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              GetBuilder<CartViewController>(builder: (logic) {
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "-",
+                                        style: TextStyle(
+                                            fontSize: 40,
+                                            fontWeight: FontWeight.bold,color: textcolor),
+                                      ),
+                                    ),
+                                  ),
+                                  GetBuilder<CartViewController>(builder: (logic) {
 
-                                if (c.itemincardwillsendtoweb[widget.id] !=
-                                    null) {
-                               return   Text(c
-                                      .itemincardwillsendtoweb[widget.id]!.qt
-                                      .toString());
-                                } else {
-                                  return const Text("0");
-                                }
-                              }),
-                              InkWell(
-                                onTap: () {
-                                  c.incrementQTtoitem(id: widget.id);
-                                },
-                                child: const Text(
-                                  "+",
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                    if (c.itemincardwillsendtoweb[widget.id] !=
+                                        null) {
+                                   return   Padding(
+                                     padding: const EdgeInsets.all(8.0),
+                                     child: Text(c
+                                            .itemincardwillsendtoweb[widget.id]!.qt
+                                            .toString(),style: const TextStyle(
+                                         fontSize: 40,
+                                         fontWeight: FontWeight.bold,color:textcolor ),),
+                                   );
+                                    } else {
+                                      return const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text("0",style: TextStyle(
+                                            fontSize: 40,
+                                            fontWeight: FontWeight.bold,color:textcolor ),),
+                                      );
+                                    }
+                                  }),
+                                  InkWell(
+                                    onTap: () {
+                                      c.incrementQTtoitem(id: widget.id);
+                                    },
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "+",
+                                        style: TextStyle(
+                                            fontSize: 40,
+                                            fontWeight: FontWeight.bold,color:textcolor ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          logic.prodect!.data[0].name,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          logic.prodect!.data[0].price,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          logic.prodect!.data[0].desc,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      logic.prodect!.data[0].name,
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      logic.prodect!.data[0].price,
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      logic.prodect!.data[0].desc,
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                ],
               );
-      }),
+        }),
+      ),
     );
   }
 

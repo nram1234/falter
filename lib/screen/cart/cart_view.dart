@@ -27,14 +27,33 @@ class CartView extends GetWidget<CartViewController> {
                       .map((e) =>
                       GestureDetector(
                           onTap: () {
-                            print(e.id);
+                           Get.to(()=>ItemView(e.id));
                           },
                           child: ItemProdect(e)))
                       .toList());
             }),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children:   [
+
+
+                Obx(() {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(controller.totalprice.toString(),style: const TextStyle(color: textcolor,fontSize: 20),),
+                  );
+                }),
+                const Text("اجمالي الفاتورة",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+              ],
+            ),
+          ),
           Obx(() {
-            return controller.sendData.value?const CircularProgressIndicator(): Padding(
+            return controller.sendData.value
+                ? const CircularProgressIndicator()
+                : Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
                   btcolor: buttonColor,

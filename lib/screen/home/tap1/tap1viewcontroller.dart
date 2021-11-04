@@ -17,7 +17,9 @@ bool getdatafromweb=true;
   }
 
   updatedata() async {
-    // Get.find<OnlineNetWorkController>().initConnctivity();
+
+     // Get.find<OnlineNetWorkController>().initConnctivity();
+     // print(Get.find<OnlineNetWorkController>().connectionStatus);
     // if (Get.find<OnlineNetWorkController>().connectionStatus) {
 
       HomeJson homeJson = await _allNetworkingReq.home( );
@@ -26,7 +28,8 @@ bool getdatafromweb=true;
 getdatafromweb=false;
 
       update();
-    // } else {
+    // }
+    // else {
     //   var d = box.read("homedata");
     //
     //   data = HomeJson.fromJson(d.data).data.products;
