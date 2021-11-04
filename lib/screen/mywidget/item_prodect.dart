@@ -13,9 +13,7 @@ class ItemProdect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size _size = MediaQuery
-        .of(context)
-        .size;
+    Size _size = MediaQuery.of(context).size;
     CartViewController c = Get.find<CartViewController>();
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -75,10 +73,12 @@ class ItemProdect extends StatelessWidget {
                             ? c.data.remove(products)
                             : c.data.add(products);
                       },
-                      child: Icon(Icons.add_shopping_cart,
+                      child: Icon(
+                        Icons.add_shopping_cart,
                         color: c.data.contains(products)
                             ? appBarcolors
-                            : blackcolore,));
+                            : blackcolore,
+                      ));
                 }),
               ))
         ],

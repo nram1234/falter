@@ -29,6 +29,9 @@ class Tab4Profile extends GetxController {
     arupdate.value=true;
     _allNetworkingReq.userUpdate(
         name: name.text, email: email.text, phone: phone.text).then((value) {
+      box.write("name",name.text);
+       box.write("phone",phone.text);
+   box.write("email",email.text);
           print(value);
           arupdate.value=false;
     });

@@ -100,8 +100,9 @@ var a=gettoken();
       "phone": phone,
     };
     var a=gettoken();
-   // _dio.options.headers['content-Type'] = 'application/json';
-    _dio.options.headers["AUTHORIZATION"] = "Bearer ${a}";
-    return await _dio.post(paseurl + "register", data: formData);
+    _dio.options.headers['content-Type'] = 'application/json';
+    _dio.options.headers["AUTHORIZATION"] = "Bearer $a";
+    _dio.options.followRedirects=   false;
+    return await _dio.post(paseurl + "userUpdate", queryParameters: formData);
   }
 }

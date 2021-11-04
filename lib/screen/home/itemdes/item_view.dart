@@ -22,6 +22,7 @@ class _ItemViewState extends State<ItemView> {
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: GetBuilder<ItemViewController>(builder: (logic) {
         return logic.getdatafromweb
@@ -61,10 +62,10 @@ class _ItemViewState extends State<ItemView> {
                                       bool v = c.data.any(
                                           (element) => element.id == widget.id);
                                       if (v) {
-                                        print("88");
+
                                         c.removeItemfromCartById(widget.id);
                                       } else {
-                                        print("99");
+
                                         c.addItemtoCartById(widget.id);
                                       }
 
@@ -86,16 +87,29 @@ class _ItemViewState extends State<ItemView> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "-",
-                                style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold),
+                              InkWell(onTap: (){
+
+                              },
+                                child: const Text(
+                                  "-",
+                                  style: TextStyle(
+                                      fontSize: 30, fontWeight: FontWeight.bold),
+                                ),
                               ),
+
+
                               Text("0"),
-                              Text(
-                                "+",
-                                style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold),
+
+
+
+                              InkWell(onTap: (){
+
+                              },
+                                child: const Text(
+                                  "+",
+                                  style: TextStyle(
+                                      fontSize: 30, fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
