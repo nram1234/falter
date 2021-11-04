@@ -13,7 +13,9 @@ class ItemProdect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size _size = MediaQuery.of(context).size;
+    Size _size = MediaQuery
+        .of(context)
+        .size;
     CartViewController c = Get.find<CartViewController>();
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -69,9 +71,19 @@ class ItemProdect extends StatelessWidget {
                 child: Obx(() {
                   return InkWell(
                       onTap: () {
-                        c.data.contains(products)
-                            ? c.data.remove(products)
-                            : c.data.add(products);
+                        bool v = c.data.contains(products);
+                        if (v) {
+                          c.data.remove(products);
+                          c.removeitemincardwillsendtoweb(products);
+                        } else {
+                          c.data.add(products);
+                          c.
+                          additemincardwillsendtoweb(
+                              products
+                          );
+                        }
+
+
                       },
                       child: Icon(
                         Icons.add_shopping_cart,

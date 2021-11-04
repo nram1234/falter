@@ -61,12 +61,13 @@ class _ItemViewState extends State<ItemView> {
                                     onTap: () {
                                       bool v = c.data.any(
                                           (element) => element.id == widget.id);
+
                                       if (v) {
-
                                         c.removeItemfromCartById(widget.id);
-                                      } else {
 
+                                      } else {
                                         c.addItemtoCartById(widget.id);
+
                                       }
 
                                       print(c.data.any((element) =>
@@ -87,28 +88,37 @@ class _ItemViewState extends State<ItemView> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              InkWell(onTap: (){
-
-                              },
+                              InkWell(
+                                onTap: () {
+                                  c.decrementQTtoitem(id: widget.id);
+                                },
                                 child: const Text(
                                   "-",
                                   style: TextStyle(
-                                      fontSize: 30, fontWeight: FontWeight.bold),
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
+                              GetBuilder<CartViewController>(builder: (logic) {
 
-
-                              Text("0"),
-
-
-
-                              InkWell(onTap: (){
-
-                              },
+                                if (c.itemincardwillsendtoweb[widget.id] !=
+                                    null) {
+                               return   Text(c
+                                      .itemincardwillsendtoweb[widget.id]!.qt
+                                      .toString());
+                                } else {
+                                  return const Text("0");
+                                }
+                              }),
+                              InkWell(
+                                onTap: () {
+                                  c.incrementQTtoitem(id: widget.id);
+                                },
                                 child: const Text(
                                   "+",
                                   style: TextStyle(
-                                      fontSize: 30, fontWeight: FontWeight.bold),
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],

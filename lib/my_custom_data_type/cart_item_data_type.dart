@@ -1,7 +1,7 @@
 class CartItemDataType {
-  late final int id;
+  late   int id;
 
-  late final int qt;
+  late   int qt;
 
   CartItemDataType({required this.id, required this.qt});
 
