@@ -106,8 +106,12 @@ Obx((){
                   Image.asset(
                     'assets/images/face.png',
                   ),
-                  Image.asset(
-                    'assets/images/googel.png',
+                  InkWell(onTap: (){
+                    _controller.googleSignInMethod();
+                  },
+                    child: Image.asset(
+                      'assets/images/googel.png',
+                    ),
                   ),
                 ],
               ),
