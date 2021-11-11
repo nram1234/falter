@@ -20,17 +20,17 @@ class LogInViewController extends GetxController {
   }
 
   void googleSignInMethod() async {
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+      GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
     print(googleUser);
-    GoogleSignInAuthentication googleSignInAuthentication =
-    await googleUser.authentication;
+    GoogleSignInAuthentication? googleSignInAuthentication =
+    await googleUser!.authentication;
 
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      idToken: googleSignInAuthentication.idToken,
-      accessToken: googleSignInAuthentication.accessToken,
+    final AuthCredential? credential = GoogleAuthProvider.credential(
+      idToken: googleSignInAuthentication .idToken!,
+      accessToken: googleSignInAuthentication .accessToken!,
     );
 
-    await _auth.signInWithCredential(credential).then((user) async{
+    await _auth.signInWithCredential(credential!).then((user) async{
       await  box.write("name", user.user!.displayName);
       await  box.write("email", user.user!.email);
       await  box.write("phone", user.user!.phoneNumber);
